@@ -14,21 +14,21 @@ const userState = [];
 app.use(cors());
 app.use(koaBody({urlencoded: true, multipart: true, json: true,}));
 
-router.post('/login/:login', async (ctx) => {
+router.post('/newuser', async (ctx) => {
   if (Object.keys(ctx.request.body).length === 0) {
     ctx.response.body = 'Нет данных'
   }
-  const { name }  = JSON.parse(ctx.request.params.login);
+  const { name }  = JSON.parse(ctx.request.body);
   const isExist = userState.find(user => user.name === name);
   if (!isExist) {
-    const login = {
+    const newUser = {
       id: idGenerator.generateGUID(),
       name: name
     }
-    userState.push(login);
+    userState.push(newUser);
     ctx.response.body = {
       status: 'ok',
-      user:login
+      user: newUser
     };
   } else {
     ctx.response.body = {
