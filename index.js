@@ -14,7 +14,7 @@ const userState = [];
 app.use(cors());
 app.use(koaBody({urlencoded: true, multipart: true, json: true,}));
 
-router.post('newuser', async (ctx) => {
+router.post('/newuser', async (ctx) => {
   if (Object.keys(ctx.request.body).length === 0) {
     ctx.response.body = 'Нет данных'
   }
