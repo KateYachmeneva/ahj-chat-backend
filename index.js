@@ -18,17 +18,17 @@ router.post('/login/:login', async (ctx) => {
   if (Object.keys(ctx.request.body).length === 0) {
     ctx.response.body = 'Нет данных'
   }
-  const { name }  = JSON.parse(ctx.request.body);
+  const { name }  = JSON.parse(ctx.request.params.login);
   const isExist = userState.find(user => user.name === name);
   if (!isExist) {
-    const newUser = {
+    const login = {
       id: idGenerator.generateGUID(),
       name: name
     }
-    userState.push(newUser);
+    userState.push(login);
     ctx.response.body = {
       status: 'ok',
-      user: newUser
+      user:login
     };
   } else {
     ctx.response.body = {
