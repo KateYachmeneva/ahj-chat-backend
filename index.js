@@ -20,7 +20,7 @@ router.post('/newuser', async (ctx) => {
     }
     const {name} = JSON.parse(ctx.request.body);
     const nameExist = userState.find (user => user.name === name);
-    if(!isExist){
+    if(!nameExist){
         const newUser ={
             id: idGenerate.generateGUID(),
             name:name
