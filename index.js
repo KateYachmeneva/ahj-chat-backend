@@ -11,7 +11,12 @@ const app = new Koa();
 const port = process.env.PORT || 3000;
 const userState = [];
 
-app.use(cors());
+app.use(cors(
+  {
+      origin: '*',
+      credentials: true,
+      allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+    }));
 app.use(koaBody({urlencoded: true, multipart: true, json: true,}));
 
 router.post('/newuser', async (ctx) => {
